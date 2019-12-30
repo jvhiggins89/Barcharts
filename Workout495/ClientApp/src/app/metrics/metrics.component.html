@@ -1,0 +1,48 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+  <h1 id="metricsTitle"> Track Goals</h1>
+  <div class="flex">
+    <div class="flex-item">
+      <div style="display: block;">
+
+        <canvas id="metricsChart" baseChart width="400" height="400"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          [plugins]="lineChartPlugins"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"></canvas>
+      </div>
+
+      
+    </div>
+    <div class="flex-item">
+      <!-- Add Metrics button functionality 
+      <button mat-button mat-raised-button color="primary" [matMenuTriggerFor]="menuDataAdd">Add Goals</button>
+      <mat-menu #menuDataAdd="matMenu">
+        <button mat-menu-item (click)="addData()">Squat</button>
+        <button mat-menu-item (click)="addData()">Bench</button>
+      </mat-menu>
+       Change Metrics button functionality
+      <button mat-button mat-raised-button color="primary" (click)="changeMetrics()">Change Goals</button>
+      -->
+      <!-- Change Timeframe button functionality-->
+      <button mat-button mat-raised-button color="primary" [matMenuTriggerFor]="menuTimeframe">Change Timeframe</button>
+      <mat-menu id="timeframeID" #menuTimeframe="matMenu">
+        <!--<button mat-menu-item (click)="changeTimeframeThreeMonth()">3 Month Review</button>-->
+        <button mat-menu-item (click)="changeTimeframeWeekly()">Weekly View</button>
+        <button mat-menu-item (click)="changeTimeframeYearly()">Yearly View</button>
+        <button mat-menu-item (click)="changeTimeframeMonthly()">Monthly View</button>
+        <button mat-menu-item (click)="changeTimeframeDaily()">Daily View</button>
+      </mat-menu>
+    </div>
+  </div>
+</body>
+

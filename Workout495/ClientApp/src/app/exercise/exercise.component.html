@@ -1,0 +1,56 @@
+<div>
+  <div style="float:left; overflow:hidden; width: 75%"><h2><fa-icon [icon]="faDumbbell"></fa-icon> Exercises</h2></div>
+  <div style="overflow:hidden; width: 25%">
+    <button type="button" class="btn new-item-button" style="float:right" (click)="openModal()">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      Exercise
+    </button>
+  </div>
+  <hr class="hr-break" />
+</div>
+<!--Start of Table-->
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+  </ng-container>
+  <!--<ng-container matColumnDef="completedreps">
+    <mat-header-cell *matHeaderCellDef> Completed Reps </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.numberOfCompletions}} </mat-cell>
+  </ng-container>-->
+  <ng-container matColumnDef="reps">
+    <mat-header-cell *matHeaderCellDef> Reps </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.reps}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="sets">
+    <mat-header-cell *matHeaderCellDef> Sets </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.sets}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="weight">
+    <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="workoutName">
+    <mat-header-cell *matHeaderCellDef> Workout </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.workoutName}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="onClickEdit(element)">
+        <mat-icon class="mat-18">edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-icon-button color="warn" (click)="onClickDelete(element)">
+        <mat-icon class="mat-18">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnHeaders"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnHeaders;"></mat-row>
+</mat-table>

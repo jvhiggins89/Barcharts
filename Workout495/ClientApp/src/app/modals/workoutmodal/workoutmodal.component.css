@@ -1,0 +1,24 @@
+.workout-modal-container {
+  display: flex;
+  flex-direction: column;
+}
+
+  .workout-modal-container > * {
+    width: 100%;
+    margin-right: 400px;
+  }
+
+  #exercise-table {
+    margin-bottom: 20px;
+  }
+
+  #available-table {
+    margin-bottom: 20px;
+  }
+
+.table-title{
+  color: rgb(123,136,29);
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: Garamond, 'Times New Roman', serif;
+}

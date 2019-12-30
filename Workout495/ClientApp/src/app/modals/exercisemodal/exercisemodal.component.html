@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Create an Exercise</h1>
+<form [formGroup]="exerciseForm" autocomplete="off" novalidate (ngSubmit)="submit(exerciseForm.value)">
+  <div fxLayout="row" class="exercise-modal-container">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Name" formControlName="name" id="name">
+      <mat-hint align="end">60 characters max</mat-hint>
+      <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
+      <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Reps" formControlName="reps">
+      <mat-hint align="end">Reps can be between 1 and 100</mat-hint>
+      <mat-error *ngIf="hasError('reps', 'min')">Your Reps cannot be less than 1</mat-error>
+      <mat-error *ngIf="hasError('reps', 'max')">Your Reps cannot be more than 100</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" class="exercise-modal-container">
+    <mat-form-field>
+      <input matInput type="number" placeholder="Sets"  formControlName="sets">
+      <mat-hint align="end">Sets can be between 1 and 100</mat-hint>
+      <mat-error *ngIf="hasError('sets', 'min')">Your Sets cannot be less than 1</mat-error>
+      <mat-error *ngIf="hasError('sets', 'max')">Your Sets cannot be more than 100</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Weight" formControlName="weight">
+      <mat-hint align="end">Weight can be between 1 and 1000</mat-hint>
+      <mat-error *ngIf="hasError('weight', 'min')">Your Weight cannot be less than 1</mat-error>
+      <mat-error *ngIf="hasError('weight', 'max')">Your Weight cannot be more than 100</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions style="float:right">
+    <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+    <button mat-raised-button class="saveButton" [disabled]="!exerciseForm.valid">Save</button>
+  </div>
+</form>

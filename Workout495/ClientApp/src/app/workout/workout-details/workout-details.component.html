@@ -1,0 +1,90 @@
+<div>
+  <div *ngIf="workoutId">
+    <h2>Workout Details</h2>
+  </div>
+
+  <div *ngIf="!workoutId">
+    <h2>New Workout</h2>
+  </div>
+
+  <div fxLayout="row">
+    <mat-form-field>
+      <input matInput #nameInput type="text" placeholder="Name" value="{{workout.name}}" />
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput #dateInput type="text" placeholder="Date" value="{{workout.scheduledDate | date: 'yyyy-MM-dd' }}"/>
+      <mat-hint>YYYY-MM-DD Format</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <!--List of exercises -->
+  <div *ngIf="exerciseAdded">
+    Exercises:
+
+    <mat-table [dataSource]="dataSource" #workoutDetailsExercise class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="completedreps">
+        <mat-header-cell *matHeaderCellDef> Completed Reps </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.numberOfCompletions}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="reps">
+        <mat-header-cell *matHeaderCellDef> Reps </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.reps}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="sets">
+        <mat-header-cell *matHeaderCellDef> Sets </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.sets}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="weight">
+        <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button color="accent" (click)="toExerciseDetails()">
+            <mat-icon class="mat-18">system_update</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="remove">
+        <mat-header-cell *matHeaderCellDef> Remove </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-button color="warn" (click)="removeExercise(element.name)">
+            <mat-icon class="mat-18">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="columnHeaders"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: columnHeaders;"></mat-row>
+    </mat-table>
+
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Available Exercises</mat-label>
+      <mat-select #selectedExercise >
+        <mat-option *ngFor="let exercise of availableExercises" value="{{exercise.name}}">
+          {{exercise.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button class="addexercise" (click)="addExercise(selectedExercise.value)" >+ Add Exercise</button>
+  </div>
+
+  <div>
+    <button class="cancel" (click)="cancelEdits()">Cancel</button>
+    <button class="save" (click)="saveEdits(nameInput.value, dateInput.value)">Save</button>
+  </div>
+
+</div>

@@ -1,0 +1,13 @@
+hr {
+  height: 6px;
+}
+.hr-break {
+  background-image: -webkit-linear-gradient(left, rgba(172, 223, 135,.8), rgba(172, 223, 135,.6), rgba(0,0,0,0));
+}
+button {
+}
+.new-item-button {
+  background-color: rgb(172, 223, 135);
+  border: 2px solid #A4DE02;
+}
+

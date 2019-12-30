@@ -1,0 +1,49 @@
+<div>
+  <div style="float:left; overflow:hidden; width: 75%"><h2><fa-icon [icon]="faDumbbell"></fa-icon> Workouts</h2></div>
+  <div style="overflow:hidden; width: 25%">
+    <button type="button" class="btn new-item-button" style="float:right" (click)="createWorkout()">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      Workout
+    </button>
+  </div>
+  <hr class="hr-break" />
+</div>
+
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" #workoutTable class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.scheduledDate | date }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="editWorkout(element)">
+          <mat-icon class="mat-18">edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="deleteWorkout(element)">
+          <mat-icon class="mat-18">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnHeaders"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnHeaders;"></mat-row>
+
+  </mat-table>
+
+  <mat-paginator
+    
+    [pageSize]="20">
+  </mat-paginator>
+
+</div>

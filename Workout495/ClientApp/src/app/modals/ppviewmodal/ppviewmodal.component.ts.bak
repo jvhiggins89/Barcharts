@@ -1,0 +1,31 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import * as moment from 'moment';
+
+
+@Component({
+    selector: 'app-progresspointsmodal',
+    templateUrl: './progresspointsmodal.component.html',
+    styleUrls: ['./progresspointsmodal.component.css']
+})
+export class ProgressPointsModalComponent implements OnInit {
+
+    constructor(
+      public dialogRef: MatDialogRef<ProgressPointsModalComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: Workout495.Models.ProgressPoints) {
+        
+    }
+
+    cancel(): void {
+        this.dialogRef.close();
+    }
+
+  ngOnInit() {
+
+    //serialize date so it can be used with angular date picker
+    //this.data.progresspoint.progressPointDate = new Date(this.data.progresspoint.progressPointDate).toISOString();
+  }
+
+
+}

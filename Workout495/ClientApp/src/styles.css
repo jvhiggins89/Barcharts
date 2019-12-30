@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+
+/*@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";*/
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* @import "~@angular/material/prebuilt-themes/pink-bluegrey.css"; */
+/* @import "~@angular/material/prebuilt-themes/purple-green.css"; */
+
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+snack-bar-container.success-snackbar {
+  background-color: #2C3E50 !important;
+  color: #acdf87;
+  font-weight: bold;
+}
+
+snack-bar-container.error-snackbar {
+  background-color: red !important;
+  font-weight: bold;
+}
+.saveButton {
+  background-color: #4CAF50;
+}

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title><b>{{data.title}}</b> starts on <b>{{data.date | date: 'dd/MM/yyyy'}}</b></h1>
+<hr />
+<div *ngIf="isWorkout">
+  <p>List Exercises Here?</p>
+</div>
+<div *ngIf='isGoal || isProgressPoint'>
+  <p>
+    <b>Description:</b> {{data.event.extendedProps.description}}<br />
+    <b>Weight:</b> {{data.event.extendedProps.weight}}<br />
+    <b>BMI:</b>  {{data.event.extendedProps.bmi}}
+  </p>
+</div>
+

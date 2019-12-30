@@ -1,0 +1,128 @@
+<!--Forms for Name and Date-->
+
+<form [formGroup]="workoutForm" autocomplete="off" novalidate (ngSubmit)="submit(workoutForm.value)">
+  <div fxLayout="row" class="workout-modal-container">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput #nameInput type="text" placeholder="Name" formControlName="name" id="name"/>
+      <mat-error *ngIf="hasError('name', 'required')">Name is required.</mat-error>
+      <mat-error *ngIf="hasError('name', 'maxlength')">You have more than 60 characters.</mat-error>
+      <mat-hint align="end">60 characters max.</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Date</mat-label>
+      <input matInput [min]="minDate" [matDatepicker]="picker" placeholder="Choose a Workout Date" #dateInput formControlName="workoutDatePicker"
+             id="workoutDatePicker" readonly (click)="picker.open()"/>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="hasError('workoutDatePicker', 'required')">Date is required.</mat-error>
+    </mat-form-field>
+  </div>
+</form>
+
+<div class="table-title">
+  Current Exercises:
+</div>
+
+<!--Table of Exercises in Workout-->
+<div class="mat-elevation-z8" id="exercise-table">
+
+  <mat-table [dataSource]="dataSource" #workoutDetailsExercise class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="completedreps">
+      <mat-header-cell *matHeaderCellDef> Completed Reps </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numberOfCompletions}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="reps">
+      <mat-header-cell *matHeaderCellDef> Reps </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.reps}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="sets">
+      <mat-header-cell *matHeaderCellDef> Sets </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sets}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="remove">
+      <mat-header-cell *matHeaderCellDef> Remove </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-button color="warn" (click)="removeExercise(element.name)">
+          <mat-icon class="mat-18">remove</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnHeaders"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: columnHeaders;"></mat-row>
+  </mat-table>
+
+  <mat-paginator
+    #ExerciseTablePaginator="matPaginator"
+    [pageSize]="5">
+
+  </mat-paginator>
+
+</div>
+
+<div class="table-title">
+  Available Exercises:
+</div>
+
+<!--Table of Available Exercises-->
+<div class="mat-elevation-z8" id="available-table">
+
+  <mat-table [dataSource]="availableData" #availableExercise class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="completedreps">
+      <mat-header-cell *matHeaderCellDef> Completed Reps </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numberOfCompletions}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="reps">
+      <mat-header-cell *matHeaderCellDef> Reps </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.reps}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="sets">
+      <mat-header-cell *matHeaderCellDef> Sets </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sets}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="add">
+      <mat-header-cell *matHeaderCellDef> Add </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-button color="warn" (click)="addExercise(element.name)">
+          <mat-icon class="mat-18">add</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="availableColumnHeaders"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: availableColumnHeaders;"></mat-row>
+  </mat-table>
+
+  <mat-paginator
+    #AvailablePaginator="matPaginator"
+    [pageSize]="5">
+
+  </mat-paginator>
+
+</div>
+
+<!--Cancel and Save Buttons-->
+<div mat-dialog-actions style="float:right">
+  <button mat-raised-button color="warn" (click)="cancelEdits()">Cancel</button>
+  <button mat-raised-button class="saveButton" [disabled]="!workoutForm.valid" (click)="saveEdits(nameInput.value, dateInput.value)">Save</button>
+</div>
+
+

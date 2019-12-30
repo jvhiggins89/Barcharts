@@ -1,0 +1,67 @@
+
+<div>
+  <div style="float:left; overflow:hidden; width: 75%"><h2><fa-icon [icon]="faDumbbell"></fa-icon> Progress Points</h2></div>
+  <div style="overflow:hidden; width: 25%">
+    <button type="button" class="btn new-item-button" style="float:right" (click)="openModalPP()">
+      <fa-icon [icon]="faPlus"></fa-icon>
+      Add Progress Points
+    </button>
+  </div>
+  <hr class="hr-break" />
+</div>
+<mat-table [dataSource]="dataSourceProgressPoints" #progressPointTable class="mat-elevation-z8">
+
+  <!--<ng-container matColumnDef="goalID">
+    <mat-header-cell *matHeaderCellDef> Goal ID </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.goalID}} </mat-cell>
+  </ng-container>-->
+
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> description </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="weight">
+    <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="bmi">
+    <mat-header-cell *matHeaderCellDef> BMI </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.bmi}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="progressPointDate">
+    <mat-header-cell *matHeaderCellDef> Goal Date </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.progressPointDate | date}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="view">
+    <mat-header-cell *matHeaderCellDef> View </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="onClickView(element)">
+        <mat-icon class="mat-18">pageview</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="onClickEditPP(element)">
+        <mat-icon class="mat-18">edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="delete">
+    <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <button mat-icon-button color="warn" (click)="onClickDeletePP(element)">
+        <mat-icon class="mat-18">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnHeadersProgressPoints"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnHeadersProgressPoints;"></mat-row>
+</mat-table>

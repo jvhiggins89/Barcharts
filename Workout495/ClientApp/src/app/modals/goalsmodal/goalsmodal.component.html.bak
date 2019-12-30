@@ -1,0 +1,77 @@
+
+
+<h1 mat-dialog-title>Create an Goal</h1>
+
+<form [formGroup]="goalForm" autocomplete="off" novalidate (ngSubmit)="UpdateGoal(goalForm.value)">
+  <div fxLayout="row" class="exercise-modal-container">
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="Title" formControlName="title" id="title">
+      <!--<mat-hint>30 characters max</mat-hint>-->
+      <mat-error *ngIf="hasError('title', 'required')">Title is required</mat-error>
+      <mat-error *ngIf="hasError('title', 'maxlength')">You have more than 30 characters</mat-error>
+    </mat-form-field>
+
+
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="Description" formControlName="description">
+      <!--<mat-hint>Not more then 100 characters long.</mat-hint>-->
+      <mat-error *ngIf="hasError('description', 'maxlength')">You have more than 100 characters</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" class="exercise-modal-container">
+    <mat-form-field>
+      <input matInput type="number" placeholder="BMI" formControlName="bmi">
+      
+      <mat-error *ngIf="hasError('bmi', 'min')">Your BMI cannot be less than 1</mat-error>
+      <mat-error *ngIf="hasError('bmi', 'max')">Your BMI cannot be more than 99</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Weight" formControlName="weight">
+      
+      <mat-error *ngIf="hasError('weight', 'min')">Your weight cannot be less than 1</mat-error>
+      <mat-error *ngIf="hasError('weight', 'max')">Your weight cannot be more than 1000</mat-error>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" class="exercise-modal-container">
+
+
+    <mat-slider (input)="onInputChange($event,'bmi')"
+                thumbLabel
+                [displayWith]="formatLabel"
+                tickInterval="1"
+                min="1"
+                max="99"
+                formControlName="bmiSlider">
+
+    </mat-slider>
+    <!--<mat-hint>BMI can be between 1 and 99</mat-hint>-->
+    <mat-slider (input)="onInputChange($event,'weight')"
+                thumbLabel
+                [displayWith]="formatLabel"
+                tickInterval="1"
+                min="1"
+                max="1000"
+                formControlName="weightSlider">
+
+    </mat-slider>
+    <!--<mat-hint>weight can be between 1 and 1000</mat-hint>-->
+  </div>
+
+
+  <div fxLayout="row" class="exercise-modal-container">
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a Goal Date" formControlName="goalDatePicker" id="goalDatePicker"
+             readonly (click)="picker.open()">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions style="float:right;">
+    <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+    <button mat-raised-button class="saveButton" [disabled]="!goalForm.valid">Save</button>
+  </div>
+</form>
+
